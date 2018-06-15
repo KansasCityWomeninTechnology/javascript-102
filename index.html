@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Coding &amp; Cocktails Drink Order App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="assets/scripts/my-script.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/styles/main.css">
+</head>
+
+<body>
+    <h1>Welcome to Coding &amp; Cocktails!</h1>
+
+    <div class="intro">
+        <div>
+            <h3>Where smart ladies learn front-end development.</h3>
+            <h3>And meet awesome aspiring LadyDevs.</h3>
+            <h3>All while enjoying stylish cocktails!</h3>
+        </div>
+        <img src="https://raw.githubusercontent.com/KansasCityWomeninTechnology/CodingAndCocktailsWorksheetTools/master/docs/assets/logo.png"
+        />
+    </div>
+
+    <h2 id="drink-count">Drinks Ordered: 0</h2>
+
+    <div class="parent">
+        <div class="order">
+            <div class="order-details"></div>
+            <img id="cocktail-image" src=""/>
+        </div>
+    </div>
+    
+    
+
+    <!-- MENU -->
+    <h2>Menu</h2>
+
+    <div class="drink-menu radio-group">
+        <label for="focusedLady">
+            <input type="radio" id="focusedLady" name="drink" value="Focused Lady"> Focused Lady
+        </label>
+        <label for="strongLady">
+            <input type="radio" id="strongLady" name="drink" value="Strong Lady"> Strong Lady
+        </label>
+        <label for="frontEndPunch">
+            <input type="radio" id="frontEndPunch" name="drink" value="Front-End Punch"> Front-End Punch
+        </label>
+        <label for="cachedOut">
+            <input type="radio" id="cachedOut" name="drink" value="Cached Out"> Cached Out
+        </label>
+        <label for="httPapaya">
+            <input type="radio" id="httPapaya" name="drink" value="httPAPAYA://"> httPAPAYA://
+        </label>
+        <label for="nerdyDaiquiri">
+            <input type="radio" id="nerdyDaiquiri" name="drink" value="Nerdy Daiquiri"> Nerdy Daiquiri
+        </label>
+        <label for="theAvernaCode">
+            <input type="radio" id="theAvernaCode" name="drink" value="The Averna Code"> The Averna Code
+        </label>
+        <label for="focusedTheMostest">
+            <input type="radio" id="focusedTheMostest" name="drink" value="Focused the Mostest"> Focused the Mostest
+        </label>
+    </div>
+
+
+    <div class="name">
+        <label for="order-form-input">Enter your name:</label>
+        <input type="text" class="form-control" id="order-form-input" placeholder="Ada Lovelace">
+    </div>
+
+    <button class="order-btn-class" id="order-btn">Order</button>
+
+</body>
+
+</html>
