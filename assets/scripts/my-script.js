@@ -63,6 +63,8 @@ const menu = {
      numberOfDrinks++;
    
      if (numberOfDrinks < 5) {
+       fetchImage();
+
        let node = document.createElement('h3');
        const textNode = document.createTextNode(name + " would like a " + drink);
        node.appendChild(textNode);
@@ -79,6 +81,18 @@ const menu = {
      document.getElementById('drink-count').innerHTML = "Drinks Ordered: " + count;
    };
    
+   const fetchImage = () => {
+      const url = 'https://source.unsplash.com/collection/2187331/300x200';
+
+      fetch(url)
+         .then((response) => { return response.blob(); })
+         .then((blob) => {
+            console.log(blob);
+            const imgUrl = URL.createObjectURL(blob);
+            document.getElementById('cocktail-image').src = imgUrl;
+         })
+         .catch((error) => { console.log(error); });
+   };
    
    document.addEventListener("DOMContentLoaded", function (event) {
    
