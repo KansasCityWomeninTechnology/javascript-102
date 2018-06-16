@@ -55,7 +55,7 @@ const menu = {
    
       document.querySelector('.radio-group').appendChild(fragment);
     }
-   }
+   };
    
    let numberOfDrinks = 0;
    
