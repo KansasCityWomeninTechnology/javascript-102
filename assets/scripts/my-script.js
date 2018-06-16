@@ -2,48 +2,59 @@ const menu = {
     drinkArray: [{
         'id': 'focusedLady',
         'label': 'Focused Lady',
-        'photoId': 'eXdKs9d37Sc'
+        'photoId': 'eXdKs9d37Sc',
+        'isAvailable': true
     },
     {
         'id': 'strongLady',
         'label': 'Strong Lady',
-        'photoId': 'gj7BLlSzIFs'
+        'photoId': 'gj7BLlSzIFs',
+        'isAvailable': false
     },
     {
         'id': 'frontEndPunch',
         'label': 'Front-End Punch',
-        'photoId': 'jcLcWL8D7AQ'
+        'photoId': 'jcLcWL8D7AQ',
+        'isAvailable': true
     },
     {
         'id': 'cachedOut',
         'label': 'Cached Out',
-        'photoId': 'b8se0pUeaA0'
+        'photoId': 'b8se0pUeaA0',
+        'isAvailable': false
     },
     {
         'id': 'httPapaya',
         'label': 'httPAPAYA://',
-        'photoId': 'pPhN8HFzkDE'
+        'photoId': 'pPhN8HFzkDE',
+        'isAvailable': true
     },
     {
         'id': 'nerdyDaiquiri',
         'label': 'Nerdy Daiquiri',
-        'photoId': 'paz5CWdB2ys'
+        'photoId': 'paz5CWdB2ys',
+        'isAvailable': true
     },
     {
         'id': 'theAvernaCode',
         'label': 'The Averna Code',
-        'photoId': 'gtDYwUIr9Vg'
+        'photoId': 'gtDYwUIr9Vg',
+        'isAvailable': false
     },
     {
         'id': 'focusedTheMostest',
         'label': 'Focused the Mostest',
-        'photoId': 'ZLZ88BR5NTk'
+        'photoId': 'ZLZ88BR5NTk',
+        'isAvailable': false
     },
     ],
     buildDrinkMenu: function () {
         let fragment = document.createDocumentFragment();
+        const availableDrinks = this.drinkArray.filter( (arrayElement) => {
+            return arrayElement.isAvailable === true;
+          });
 
-        this.drinkArray.forEach((drink) => {
+        availableDrinks.forEach((drink) => {
             let labelNode = document.createElement('label');
             labelNode.setAttribute('for', drink.id);
 
@@ -111,9 +122,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
     menu.buildDrinkMenu();
 
     document.getElementById('order-btn').addEventListener('click', function () {
-        const orderName = document.getElementById('order-form-input').value;
-        const drinkId = document.querySelector('input[type="radio"]:checked').id;
-        submitOrder(orderName, drinkId);
+        const orderName = document.getElementById('order-form-input').value.trim();
+        const drinkElement = document.querySelector('input[type="radio"]:checked');
+
+        if (orderName && drinkElement) {
+            submitOrder(orderName, drinkElement.id);
+        }
     });
 
     document.getElementById('order-btn').addEventListener('click', function () {
