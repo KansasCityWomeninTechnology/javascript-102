@@ -1,6 +1,6 @@
 
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener("DOMContentLoaded", (event) => {
 
-    document.getElementById('order-btn').onclick = function () {};
+    document.getElementById('order-btn').onclick = () => {};
 
 });
