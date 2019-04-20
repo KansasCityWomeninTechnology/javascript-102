@@ -1,122 +1,61 @@
-const menu = {
-    drinkArray: [{
-        'id': 'focusedLady',
-        'label': 'Focused Lady',
-        'photoId': 'eXdKs9d37Sc'
-    },
-    {
-        'id': 'strongLady',
-        'label': 'Strong Lady',
-        'photoId': 'gj7BLlSzIFs'
-    },
-    {
-        'id': 'frontEndPunch',
-        'label': 'Front-End Punch',
-        'photoId': 'jcLcWL8D7AQ'
-    },
-    {
-        'id': 'cachedOut',
-        'label': 'Cached Out',
-        'photoId': 'b8se0pUeaA0'
-    },
-    {
-        'id': 'httPapaya',
-        'label': 'httPAPAYA://',
-        'photoId': 'pPhN8HFzkDE'
-    },
-    {
-        'id': 'nerdyDaiquiri',
-        'label': 'Nerdy Daiquiri',
-        'photoId': 'paz5CWdB2ys'
-    },
-    {
-        'id': 'theAvernaCode',
-        'label': 'The Averna Code',
-        'photoId': 'gtDYwUIr9Vg'
-    },
-    {
-        'id': 'focusedTheMostest',
-        'label': 'Focused the Mostest',
-        'photoId': 'ZLZ88BR5NTk'
-    },
-    ],
-    buildDrinkMenu: function () {
-        let fragment = document.createDocumentFragment();
+const cocktailsArray = [{
+    'id': 'focusedLady',
+    'label': 'Focused Lady'
+},
+{
+    'id': 'strongLady',
+    'label': 'Strong Lady'
+},
+{
+    'id': 'frontEndPunch',
+    'label': 'Front-End Punch'
+},
+{
+    'id': 'cachedOut',
+    'label': 'Cached Out'
+},
+{
+    'id': 'httPapaya',
+    'label': 'httPAPAYA://'
+},
+{
+    'id': 'nerdyDaiquiri',
+    'label': 'Nerdy Daiquiri'
+},
+{
+    'id': 'theAvernaCode',
+    'label': 'The Averna Code'
+},
+{
+    'id': 'focusedTheMostest',
+    'label': 'Focused the Mostest'
+},
+];
 
-        this.drinkArray.forEach((drink) => {
-            let labelNode = document.createElement('label');
-            labelNode.setAttribute('for', drink.id);
+const buildCocktailsMenu = (cocktails) => {
+    let cocktailsString = '';
+    cocktails.forEach( (cocktail) => {
+        cocktailsString += `<label class="radio" for="${cocktail.id}"><input type="radio" id="${cocktail.id}" name="drink" value="${cocktail.label}">${cocktail.label}</label>`;
+    });
 
-            let radioNode = document.createElement('input');
-            radioNode.id = drink.id;
-            radioNode.name = 'drink';
-            radioNode.setAttribute('type', 'radio');
-            radioNode.setAttribute('value', drink.label);
-
-            const textNode = document.createTextNode(drink.label);
-
-            labelNode.appendChild(radioNode);
-            labelNode.appendChild(textNode);
-
-            fragment.appendChild(labelNode);
-        });
-
-        document.querySelector('.radio-group').appendChild(fragment);
-    }
+    document.querySelector('.radio-group').innerHTML = cocktailsString;
 };
 
-let numberOfDrinks = 0;
-
-const submitOrder = function (name, drinkId) {
-    numberOfDrinks++;
-
-    if (numberOfDrinks < 5) {
-        const drinkObject = menu.drinkArray.find((arrayElement => {
-            return arrayElement.id === drinkId;
-        }));
-
-        fetchImage(drinkObject.photoId);
-
-        let node = document.createElement('h3');
-        const textNode = document.createTextNode(`${name} would like a ${drinkObject.label}`);
-        node.appendChild(textNode);
-
-        document.querySelector('.order-details').appendChild(node);
-    } else {
-        alert("Drink order queue is full. Please try ordering again in a few minutes.");
-    }
-
-    updateOrderCount(numberOfDrinks);
+const submitOrder = (name, drink) => {
+    let node = document.createElement('h3');
+    const textNode = document.createTextNode(name + " would like a " + drink);
+    node.appendChild(textNode);
+    document.querySelector('.order-details').appendChild(node);
 };
 
-const updateOrderCount = (count) => {
-    document.getElementById('drink-count').innerHTML = `Drinks Ordered: ${count}`;
-};
+document.addEventListener("DOMContentLoaded", (event) => {
 
-const fetchImage = (photoId) => {
-    const url = `https://source.unsplash.com/${photoId}/300x200`;
+    buildCocktailsMenu(cocktailsArray);
 
-    fetch(url)
-        .then((response) => { return response.blob(); })
-        .then((blob) => {
-            console.log(blob);
-            const imgUrl = URL.createObjectURL(blob);
-            document.getElementById('cocktail-image').src = imgUrl;
-        })
-        .catch((error) => { console.log(error); });
-};
-
-document.addEventListener("DOMContentLoaded", function (event) {
-
-    menu.buildDrinkMenu();
-
-    document.getElementById('order-btn').addEventListener('click', function () {
+    document.getElementById('order-btn').addEventListener('click', () => {
+        const drinkName = document.querySelector('input[type="radio"]:checked').value;
         const orderName = document.getElementById('order-form-input').value;
-        const drinkId = document.querySelector('input[type="radio"]:checked').id;
-        submitOrder(orderName, drinkId);
+        submitOrder(orderName, drinkName);
     });
 
-    document.getElementById('order-btn').addEventListener('click', function () {
-        console.log('second click handler');
-    });
 });
